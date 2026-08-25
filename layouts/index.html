@@ -31,6 +31,62 @@
   </div>
 </section>
 
+<section class="sec" id="ahead-arrival">
+  <div class="bar">
+    <p class="kicker">The two that matter</p>
+    <h2>Ahead and Arrival</h2>
+    <p class="sub">Two searches, two different questions. Most map apps only answer one of them — and once you're moving, it's the wrong one.</p>
+
+    <div class="pair">
+      <article class="feat">
+        <div class="feattext">
+          <p class="ftag">Ahead</p>
+          <h3>What's coming up, on the road you're already on</h3>
+          <p>Headed searches a <em>corridor along your route</em>, not a circle around your car. So the gas station it finds is one you'll actually pass — not one four miles back the way you came.</p>
+          <p>One row each for food, restroom, gas, and charging, with the distance ahead. Open a row for more options, or set preferred brands so your chain comes first.</p>
+          <ul class="ticks">
+            <li>Distances measured forward along the route, not as the crow flies</li>
+            <li>EV charging shows real power ratings, not just a pin</li>
+            <li>Never leaves the map — the route stays on screen behind it</li>
+          </ul>
+        </div>
+        <div class="featshot">
+          <div class="device">
+            <span class="btns"><i class="action"></i><i class="up"></i><i class="down"></i><i class="power"></i></span>
+            <span class="screen">
+              <img src="{{ "assets/img/06-ahead-on-route.webp" | relURL }}" width="1320" height="2868"
+                   alt="Ahead on Your Route: Food 900 feet ahead, Restroom 0.5 miles ahead, Gas at Chevron 0.2 miles ahead, and EV charging at 350 kilowatts 0.4 miles ahead." loading="lazy" decoding="async">
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <article class="feat rev">
+        <div class="feattext">
+          <p class="ftag">Arrival</p>
+          <h3>Where the car goes, before you're circling the block</h3>
+          <p>Arrival searches around <em>your destination</em> — because a radius around a moving car goes stale the moment you drive on, and parking is an arrival problem, not a mid-drive one.</p>
+          <p>Ask it from an hour out and the answers are still right when you get there. Pin the ones you like and they stay on the map as you approach.</p>
+          <ul class="ticks">
+            <li>Distances read from where you're going, not where you are</li>
+            <li>Parking, food, restrooms, gas, and charging around the destination</li>
+            <li>Pinned places persist on the route map for the rest of the drive</li>
+          </ul>
+        </div>
+        <div class="featshot">
+          <div class="device">
+            <span class="btns"><i class="action"></i><i class="up"></i><i class="down"></i><i class="power"></i></span>
+            <span class="screen">
+              <img src="{{ "assets/img/04-arrival-poi-pinned.webp" | relURL }}" width="1320" height="2868"
+                   alt="The Arrival sheet near Oakland City Hall, listing Ace Parking 250 feet away and Douglas Parking 600 feet away." loading="lazy" decoding="async">
+            </span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <section class="sec" id="features">
   <svg class="contour" viewBox="0 0 1400 900" preserveAspectRatio="none" aria-hidden="true" focusable="false">
     <path d="M-40 200 C 320 130, 600 290, 860 200 S 1220 70, 1440 160"/>
@@ -55,7 +111,7 @@
         <div class="wpmark"><span class="mi">4.9 mi</span><span class="dot"></span></div>
         <div>
           <h3>Ahead</h3>
-          <p>The nearest food, restroom, gas, or charging <em>in front of you on the route</em> — a corridor search, not a radius around a car that has already moved.</p>
+          <p>Mid-drive, without leaving the route: the nearest food, restroom, gas, or charging still in front of you. <a href="#ahead-arrival">See how it works</a>.</p>
         </div>
       </div>
       <div class="wp">
@@ -69,7 +125,7 @@
         <div class="wpmark"><span class="mi">12 mi</span><span class="dot"></span></div>
         <div>
           <h3>Arrival</h3>
-          <p>Parking, food, and services around your destination, measured from where you're <em>going</em> — so you know where the car goes before you're circling the block.</p>
+          <p>Before you get there: parking and food around the destination, measured from it. <a href="#ahead-arrival">See how it works</a>.</p>
         </div>
       </div>
       <div class="wp">
@@ -91,7 +147,7 @@
 
     <div class="gallery">
       <figure class="shot">
-        <div class="device" style="--w:100%">
+        <div class="device">
           <span class="btns"><i class="action"></i><i class="up"></i><i class="down"></i><i class="power"></i></span>
           <span class="screen">
             <img src="{{ "assets/img/05-pinned-pins-overview.webp" | relURL }}" width="1320" height="2868"
@@ -101,17 +157,17 @@
         <figcaption><b>Live progress</b>How far you've come and how much is left, without a single turn instruction.</figcaption>
       </figure>
       <figure class="shot">
-        <div class="device" style="--w:100%">
+        <div class="device">
           <span class="btns"><i class="action"></i><i class="up"></i><i class="down"></i><i class="power"></i></span>
           <span class="screen">
-            <img src="{{ "assets/img/04-arrival-poi-pinned.webp" | relURL }}" width="1320" height="2868"
-                 alt="The Arrival sheet listing parking near Oakland City Hall, the nearest 250 feet from the destination." loading="lazy" decoding="async">
+            <img src="{{ "assets/img/07-map-layers.webp" | relURL }}" width="1320" height="2868"
+                 alt="The Map Layers panel open over the route, listing Traffic, Weather, Hazards, and Landmarks." loading="lazy" decoding="async">
           </span>
         </div>
-        <figcaption><b>Arrival</b>Parking measured from your destination — 250 feet away, not two miles behind you.</figcaption>
+        <figcaption><b>Layers, in one place</b>Traffic, weather, hazards, and landmarks — one button, next to the gear.</figcaption>
       </figure>
       <figure class="shot">
-        <div class="device" style="--w:100%">
+        <div class="device">
           <span class="btns"><i class="action"></i><i class="up"></i><i class="down"></i><i class="power"></i></span>
           <span class="screen">
             <img src="{{ "assets/img/01-hero-empty-state.webp" | relURL }}" width="1320" height="2868"
@@ -140,6 +196,30 @@
     <div>
       <p class="lede" style="margin-bottom:20px">Location goes to Apple for routing and weather, and a map area goes to RainViewer and Open Charge Map when you use those features. The policy says exactly what each one sees.</p>
       <a class="btn btn-ghost" href="{{ "/privacy/" | relURL }}">Read the privacy policy</a>
+    </div>
+  </div>
+</section>
+<section class="sec" id="support">
+  <div class="bar">
+    <p class="kicker">Support</p>
+    <h2>Stuck on something?</h2>
+    <p class="sub">Headed has no account system, so there's nothing to reset and no ticket queue to wait in — email reaches a person.</p>
+    <div class="supportgrid">
+      <div class="scard">
+        <h3>Get help</h3>
+        <p>Questions, bugs, or something that behaved oddly on a drive.</p>
+        <p><a href="mailto:bradbice@icloud.com?subject=Headed%20support">bradbice@icloud.com</a></p>
+      </div>
+      <div class="scard">
+        <h3>Common answers</h3>
+        <p>Why there's no turn-by-turn, why location is asked for, and what to do when a route or place looks wrong.</p>
+        <p><a href="{{ "/support/" | relURL }}">Read the support page</a></p>
+      </div>
+      <div class="scard">
+        <h3>Your data</h3>
+        <p>What stays on your device, and what each outside service receives.</p>
+        <p><a href="{{ "/privacy/" | relURL }}">Privacy policy</a></p>
+      </div>
     </div>
   </div>
 </section>
