@@ -68,13 +68,13 @@ guarantee their availability, and a feature can stop working if a service change
 Weather, weather-hazard, and EV charging features are scoped to the United States in this version.
 
 What each service receives, and links to their own privacy policies, are set out in the
-[Privacy Policy](/headed-app/privacy).
+[Privacy Policy](/privacy).
 
 ## 5. Your data
 
 Headed has no accounts and no server. What it remembers — saved places, recent destinations,
 preferences, an in-progress trip — stays on your device, and deleting the app deletes all of it.
-The [Privacy Policy](/headed-app/privacy) is the full account, and
+The [Privacy Policy](/privacy) is the full account, and
 forms part of these Terms.
 
 **Headed does not back anything up.** If you delete the app, lose your device, or reset it, your

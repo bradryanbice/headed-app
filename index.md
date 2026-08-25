@@ -31,7 +31,7 @@ No account. No login. No tracking, no ads, no analytics. Everything Headed remem
 trips — recent destinations, saved places, preferences — stays on your device. Nothing is uploaded
 anywhere, because there's no server to upload it to.
 
-The [Privacy Policy](/headed-app/privacy) is the full account.
+The [Privacy Policy](/privacy) is the full account.
 
 ## Get Headed
 
@@ -40,8 +40,8 @@ opens.
 
 ## Legal
 
-- [Privacy Policy](/headed-app/privacy)
-- [Terms of Use](/headed-app/terms)
+- [Privacy Policy](/privacy)
+- [Terms of Use](/terms)
 
 Questions: [bradbice@icloud.com](mailto:bradbice@icloud.com)
 
