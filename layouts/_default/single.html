@@ -1,6 +1,21 @@
 {{ define "main" }}
+<header class="pagehead">
+  <svg class="contour" viewBox="0 0 1400 340" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path d="M-40 70 C 300 10, 560 150, 820 76 S 1200 -20, 1440 54"/>
+    <path d="M-40 122 C 300 62, 560 202, 820 128 S 1200 32, 1440 106"/>
+    <path d="M-40 176 C 300 116, 560 256, 820 182 S 1200 86, 1440 160"/>
+    <path d="M-40 236 C 300 176, 560 316, 820 242 S 1200 146, 1440 220"/>
+  </svg>
+  <div class="bar">
+    {{ with .Params.kicker }}<p class="kicker">{{ . }}</p>{{ end }}
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+  </div>
+</header>
+
 <article class="prose-wrap">
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
+  <div class="prose-body">
+    {{ .Content }}
+  </div>
 </article>
 {{ end }}

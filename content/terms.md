@@ -1,4 +1,5 @@
 ---
+kicker: "Legal"
 title: "Terms of Use"
 description: "The terms covering your use of Headed — including the safety terms that matter most in a driving app."
 ---

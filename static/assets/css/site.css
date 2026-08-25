@@ -311,38 +311,54 @@ a{color:var(--route);}
 
 .tilt{transform:perspective(1500px) rotateY(-14deg) rotateX(3.5deg) rotate(.5deg);}
 
-/* ---------- prose pages (privacy, terms) ---------- */
-.prose-page main{max-width:none;}
-.prose{max-width:none;}
-.prose-page main > *{max-width:var(--maxw);}
-.prose-wrap{max-width:var(--maxw);margin:0 auto;padding:56px 26px 84px;}
-.prose-wrap > *{max-width:70ch;}
-.prose-wrap h1{
-  font-size:clamp(31px,4.4vw,44px);line-height:1.08;letter-spacing:-.028em;
-  font-weight:800;margin:0 0 8px;
+/* ---------- prose pages (support, privacy, terms) ---------- */
+/* Page header — the prose pages used to drop straight from the nav into an H1,
+   which read as abrupt next to the landing page. Same contour ground for continuity. */
+.pagehead{
+  position:relative;
+  border-bottom:1px solid var(--rule);
+  background:var(--paper-2);
+  padding:58px 0 46px;
 }
-.prose-wrap h2{
-  font-size:clamp(20px,2.4vw,24px);line-height:1.25;letter-spacing:-.018em;
-  font-weight:700;margin:44px 0 12px;padding-top:22px;border-top:1px solid var(--rule);
+/* Match the prose measure exactly so the H1 and the body copy share a left edge —
+   .bar's 1120px gutter would otherwise start the header 120px left of the text. */
+.pagehead .bar{position:relative;z-index:1;max-width:74ch;}
+.pagehead h1{
+  font-size:clamp(34px,5vw,50px);line-height:1.04;letter-spacing:-.03em;
+  font-weight:800;margin:0 0 14px;max-width:18ch;text-wrap:balance;
 }
-.prose-wrap h2:first-of-type{margin-top:34px;}
-.prose-wrap h3{font-size:19px;font-weight:700;margin:28px 0 8px;}
-.prose-wrap p{margin:0 0 15px;color:var(--ink-2);}
-.prose-wrap strong{color:var(--ink);font-weight:600;}
-.prose-wrap ul,.prose-wrap ol{color:var(--ink-2);padding-left:22px;margin:0 0 15px;}
-.prose-wrap li{margin-bottom:8px;}
-.prose-wrap table{border-collapse:collapse;width:100%;font-size:15px;margin:0 0 18px;}
-.prose-wrap th,.prose-wrap td{border:1px solid var(--rule);padding:9px 12px;text-align:left;}
-.prose-wrap th{background:var(--paper-2);font-weight:600;color:var(--ink);}
-.prose-wrap code{
+.pagehead .lede{max-width:56ch;margin:0;}
+
+/* The measure is centred rather than pinned left — a 70ch column inside an
+   1120px wrapper left the right half of the page empty. */
+.prose-wrap{max-width:none;margin:0;padding:0;}
+.prose-body{
+  max-width:74ch;
+  margin:0 auto;
+  padding:54px 26px 90px;
+}
+.prose-body > *{max-width:none;}
+.prose-body h2{
+  font-size:clamp(21px,2.5vw,25px);line-height:1.24;letter-spacing:-.018em;
+  font-weight:700;margin:46px 0 12px;padding-top:24px;border-top:1px solid var(--rule);
+}
+.prose-body h2:first-child{margin-top:0;padding-top:0;border-top:0;}
+.prose-body h3{font-size:19.5px;font-weight:700;letter-spacing:-.012em;margin:30px 0 8px;}
+.prose-body p{margin:0 0 15px;color:var(--ink-2);}
+.prose-body strong{color:var(--ink);font-weight:600;}
+.prose-body ul,.prose-body ol{color:var(--ink-2);padding-left:22px;margin:0 0 15px;}
+.prose-body li{margin-bottom:8px;}
+.prose-body table{border-collapse:collapse;width:100%;font-size:15px;margin:0 0 18px;}
+.prose-body th,.prose-body td{border:1px solid var(--rule);padding:9px 12px;text-align:left;vertical-align:top;}
+.prose-body th{background:var(--paper-2);font-weight:600;color:var(--ink);}
+.prose-body code{
   font-family:"DM Mono",monospace;font-size:14px;background:var(--paper-2);
   padding:2px 5px;border-radius:3px;
 }
-.prose-wrap blockquote{
-  border-left:3px solid var(--route);margin:0 0 18px;padding:2px 0 2px 18px;
-  color:var(--ink-2);
+.prose-body blockquote{
+  border-left:3px solid var(--route);margin:0 0 18px;padding:2px 0 2px 18px;color:var(--ink-2);
 }
-.tablewrap{overflow-x:auto;}
+.prose-body > table{display:block;overflow-x:auto;}
 
 /* ---------- footer ---------- */
 .sitefoot{border-top:1px solid var(--rule);background:var(--paper-2);}

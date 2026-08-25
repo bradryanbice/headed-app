@@ -1,4 +1,5 @@
 ---
+kicker: "Legal"
 title: "Privacy Policy"
 description: "What Headed collects, where it stays, and exactly what each outside service receives."
 ---
