@@ -4,7 +4,7 @@ title: Headed — Privacy Policy
 
 # Privacy Policy — Headed
 
-**Last updated:** August 22, 2026
+**Last updated:** August 24, 2026
 
 Headed is a journey-overview companion for driving: it shows your whole route, where you are on
 it, and what's nearby, then hands off to Apple Maps for turn-by-turn navigation. This policy
@@ -63,11 +63,16 @@ is standard MapKit/WeatherKit usage and is covered by
 
 **RainViewer.** When the optional weather radar layer is on, Headed requests precipitation radar
 tiles for the area you're viewing. RainViewer sees the map area being requested; it does not
-receive your saved places, search history, or any identifying information.
+receive your saved places, search history, or any identifying information. See
+[RainViewer's privacy policy](https://www.rainviewer.com/privacy.html).
 
 **Open Charge Map.** When searching for EV chargers, Headed sends an approximate location or
 bounding box to look up nearby charging stations. Open Charge Map sees that location query; it
-does not receive your saved places, search history, or any identifying information.
+does not receive your saved places, search history, or any identifying information. See
+[Open Charge Map's license and privacy policy](https://openchargemap.org/about/terms).
+
+Headed reads from both services anonymously — it holds no account with either, and neither
+receives anything that identifies you or your device beyond what any web request carries.
 
 Neither RainViewer nor Open Charge Map is a bundled SDK — Headed talks to them the same way a web
 browser talks to a website, over plain HTTPS, only when their feature is actively in use.
