@@ -15,7 +15,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="{{ "assets/css/site.css" | relURL }}">
+{{/* Fingerprinted: the filename carries a content hash, so a changed stylesheet is a
+     new URL and can never be served stale from cache. Pages sets long cache lifetimes
+     on assets, which previously meant a CSS change looked like a failed deploy. */}}
+{{ $css := resources.Get "css/site.css" | minify | fingerprint "sha256" }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
 </head>
 <body class="{{ if .IsHome }}home{{ else }}prose-page{{ end }}">
 

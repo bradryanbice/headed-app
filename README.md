@@ -21,6 +21,12 @@ hugo --gc --minify # production build into public/
 | Privacy Policy | `content/privacy.md` | `/privacy/` |
 | Terms of Use | `content/terms.md` | `/terms/` |
 
+The stylesheet lives in `assets/css/site.css` (Hugo's asset pipeline), **not** `static/` — it is
+minified and **fingerprinted**, so the published filename carries a content hash. A changed
+stylesheet is therefore a new URL and can never be served stale from cache. Pages sets long cache
+lifetimes on assets, which previously meant a CSS change could look like a failed deploy. Images
+stay in `static/` because they don't change.
+
 `static/CNAME` holds the custom domain. `static/assets/img/` holds the app screenshots at native
 1320×2868, converted to WebP — they are deliberately *not* downscaled, because the phone renders
 are large and crispness was the point.
