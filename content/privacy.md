@@ -1,9 +1,7 @@
 ---
-title: Headed — Privacy Policy
+title: "Privacy Policy"
+description: "What Headed collects, where it stays, and exactly what each outside service receives."
 ---
-
-# Privacy Policy — Headed
-
 **Last updated:** August 24, 2026
 
 Headed is a journey-overview companion for driving: it shows your whole route, where you are on
@@ -113,3 +111,5 @@ be reflected here before they take effect.
 
 Questions about this policy or how Headed handles information can be sent to
 [bradbice@icloud.com](mailto:bradbice@icloud.com).
+
+

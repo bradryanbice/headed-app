@@ -1,0 +1,16 @@
+baseURL = "https://headedapp.com/"
+locale = "en-us"
+title = "Headed"
+enableRobotsTXT = true
+
+[params]
+  description = "See your whole trip before you drive it. Headed is a journey-overview companion for Apple Maps."
+  email = "bradbice@icloud.com"
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[markup.goldmark.extensions]
+  table = true
+
+[taxonomies]

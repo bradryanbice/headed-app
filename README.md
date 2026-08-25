@@ -1,26 +1,43 @@
-# Headed — public site
+# headedapp.com
 
 The public site for [Headed](https://github.com/bradryanbice/headed), a journey-overview companion
-app for Apple Maps. Served by GitHub Pages at <https://bradryanbice.github.io/headed-app/>.
+app for Apple Maps. Live at <https://headedapp.com>.
 
-Only public-facing pages live here — the app's source and internal docs stay in the private
-`headed` repo.
+**Hugo**, deployed to GitHub Pages by `.github/workflows/hugo.yml`. GitHub Pages only builds Jekyll
+natively, so the workflow builds the site and publishes it as a Pages artifact — the repo's
+Pages source is set to **GitHub Actions**, not a branch. Changing it back to a branch will break
+the deploy.
 
-| Page | Path | Source of truth |
+```
+hugo server        # local preview
+hugo --gc --minify # production build into public/
+```
+
+## Layout
+
+| Page | Source | URL |
 | --- | --- | --- |
-| Landing | `index.md` | this repo |
-| Privacy Policy | `privacy.md` → `/privacy` | `docs/privacy.md` in `headed` |
-| Terms of Use | `terms.md` → `/terms` | `docs/terms.md` in `headed` |
+| Landing | `layouts/index.html` | `/` |
+| Privacy Policy | `content/privacy.md` | `/privacy/` |
+| Terms of Use | `content/terms.md` | `/terms/` |
 
-**The legal pages do not auto-sync.** `docs/privacy.md` and `docs/terms.md` in the private repo are
-the sources of truth; when either changes, update the copy here too. The published copies drop the
-internal "source copy" note that the private originals carry at the top.
+`static/CNAME` holds the custom domain. `static/assets/img/` holds the app screenshots at native
+1320×2868, converted to WebP — they are deliberately *not* downscaled, because the phone renders
+are large and crispness was the point.
 
-This repo was renamed from `headed-privacy` (2026-08-24) when it grew past hosting just the privacy
-policy. Nothing external referenced the old URLs at the time of the rename.
+**The legal pages do not auto-sync.** `docs/privacy.md` and `docs/terms.md` in the private `headed`
+repo are the sources of truth; update the copies here when either changes. The published copies
+drop the internal "source copy" note the originals carry.
 
-## Still to do (tracked as [#23](https://github.com/bradryanbice/headed/issues/23))
+## Design
 
-- Feature section with screenshots — copy exists in `docs/app-store-submission-copy.md`, imagery
-  exists in the captured App Store screenshot set.
+Direction B ("Cartographic") from [#24](https://github.com/bradryanbice/headed/issues/24): contour
+ground, and the violet route line running down the features section as a spine with each feature
+hanging off it as a waypoint. Palette derives from `HeadedDesignSystem` — accent `#5B21B6` light,
+`#A78BFA` dark. Light and dark themes both supported.
+
+## Still to do ([#23](https://github.com/bradryanbice/headed/issues/23), [#24](https://github.com/bradryanbice/headed/issues/24))
+
 - Download / TestFlight-beta link — blocked until an External TestFlight group exists.
+- A dedicated support section, if the site is to be App Store Connect's Support URL.
+- Optional: the dashboard photograph from #24, which would become the hero.

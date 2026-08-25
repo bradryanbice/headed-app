@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ if .IsHome }}Headed — See your whole trip before you drive it{{ else }}{{ .Title }} — Headed{{ end }}</title>
+<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
+<meta name="theme-color" content="#FBFAF7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#101215" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="{{ if .IsHome }}Headed{{ else }}{{ .Title }} — Headed{{ end }}">
+<meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ .Permalink }}">
+<link rel="canonical" href="{{ .Permalink }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="{{ "assets/css/site.css" | relURL }}">
+</head>
+<body class="{{ if .IsHome }}home{{ else }}prose-page{{ end }}">
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <div class="bar">
+    <a class="brand" href="{{ "/" | relURL }}">Headed</a>
+    <nav class="nav" aria-label="Main">
+      <a href="{{ "/#features" | relURL }}">Features</a>
+      <a href="{{ "/privacy/" | relURL }}">Privacy</a>
+      <a href="{{ "/terms/" | relURL }}">Terms</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+{{ block "main" . }}{{ end }}
+</main>
+
+<footer class="sitefoot">
+  <div class="bar footgrid">
+    <div>
+      <p class="fbrand">Headed</p>
+      <p class="fnote">A journey-overview companion for Apple Maps. Everything stays on your device.</p>
+    </div>
+    <nav aria-label="Footer">
+      <p class="flabel">Site</p>
+      <a href="{{ "/#features" | relURL }}">Features</a>
+      <a href="{{ "/privacy/" | relURL }}">Privacy Policy</a>
+      <a href="{{ "/terms/" | relURL }}">Terms of Use</a>
+    </nav>
+    <div>
+      <p class="flabel">Contact</p>
+      <a href="mailto:{{ site.Params.email }}">{{ site.Params.email }}</a>
+      <p class="fcopy">© 2026 Brad Bice</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

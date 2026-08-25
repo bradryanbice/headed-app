@@ -1,9 +1,7 @@
 ---
-title: Headed — Terms of Use
+title: "Terms of Use"
+description: "The terms covering your use of Headed — including the safety terms that matter most in a driving app."
 ---
-
-# Terms of Use — Headed
-
 **Last updated:** August 24, 2026
 
 Headed is made by Brad Bice ("we", "us"). These Terms of Use ("Terms") cover your use of the
@@ -132,3 +130,5 @@ accept the updated Terms.
 
 Questions about these Terms can be sent to
 [bradbice@icloud.com](mailto:bradbice@icloud.com).
+
+

@@ -1,0 +1,146 @@
+{{ define "main" }}
+<section class="hero">
+  <svg class="contour" viewBox="0 0 1400 700" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path d="M-40 120 C 300 40, 560 210, 820 120 S 1200 -10, 1440 90"/>
+    <path d="M-40 178 C 300 98, 560 268, 820 178 S 1200 48, 1440 148"/>
+    <path d="M-40 236 C 300 156, 560 326, 820 236 S 1200 106, 1440 206"/>
+    <path d="M-40 300 C 300 220, 560 390, 820 300 S 1200 170, 1440 270"/>
+    <path d="M-40 430 C 300 350, 560 520, 820 430 S 1200 300, 1440 400"/>
+    <path d="M-40 492 C 300 412, 560 582, 820 492 S 1200 362, 1440 462"/>
+    <path d="M-40 556 C 300 476, 560 646, 820 556 S 1200 426, 1440 526"/>
+  </svg>
+  <div class="bar">
+    <div>
+      <h1>Know the <em>whole</em> road ahead.</h1>
+      <p class="lede">Headed shows your entire route on one map — where you are on it, how much is left, and what's worth stopping for. When you want the turns, it hands off to Apple Maps in a tap.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#features">See how it works</a>
+        <a class="btn btn-ghost" href="{{ "/privacy/" | relURL }}">How your data is handled</a>
+      </div>
+      <p class="notyet">TestFlight beta opening soon — the join link lands here first.</p>
+    </div>
+    <div class="herophone">
+      <div class="device tilt" style="--w:300px">
+        <span class="btns"><i class="action"></i><i class="up"></i><i class="down"></i><i class="power"></i></span>
+        <span class="screen">
+          <img src="{{ "assets/img/03-route-overview.webp" | relURL }}" width="1320" height="2868"
+               alt="Headed showing a committed route from San Francisco to Oakland City Hall, with distance driven, percent complete, and distance remaining." loading="eager" decoding="async">
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="features">
+  <svg class="contour" viewBox="0 0 1400 900" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path d="M-40 200 C 320 130, 600 290, 860 200 S 1220 70, 1440 160"/>
+    <path d="M-40 262 C 320 192, 600 352, 860 262 S 1220 132, 1440 222"/>
+    <path d="M-40 640 C 320 570, 600 730, 860 640 S 1220 510, 1440 600"/>
+    <path d="M-40 704 C 320 634, 600 794, 860 704 S 1220 574, 1440 664"/>
+  </svg>
+  <div class="bar">
+    <p class="kicker">One trip, start to finish</p>
+    <h2>The whole drive, laid out like a map</h2>
+    <p class="sub">Every feature sits somewhere on the line you're actually driving — that's the difference between Headed and a list of upcoming turns.</p>
+
+    <div class="route">
+      <div class="wp">
+        <div class="wpmark"><span class="mi">0 mi</span><span class="dot"></span></div>
+        <div>
+          <h3>Pick your line</h3>
+          <p>Alternate routes side by side, with distance and time, before you commit to one. Add a stop and the whole trip recalculates around it.</p>
+        </div>
+      </div>
+      <div class="wp">
+        <div class="wpmark"><span class="mi">4.9 mi</span><span class="dot"></span></div>
+        <div>
+          <h3>Ahead</h3>
+          <p>The nearest food, restroom, gas, or charging <em>in front of you on the route</em> — a corridor search, not a radius around a car that has already moved.</p>
+        </div>
+      </div>
+      <div class="wp">
+        <div class="wpmark"><span class="mi">9.2 mi</span><span class="dot"></span></div>
+        <div>
+          <h3>Weather on the line</h3>
+          <p>Precipitation radar, forecasts timed to when you'll actually be there, and severe-weather alerts along the way — not for a city you're only passing through.</p>
+        </div>
+      </div>
+      <div class="wp">
+        <div class="wpmark"><span class="mi">12 mi</span><span class="dot"></span></div>
+        <div>
+          <h3>Arrival</h3>
+          <p>Parking, food, and services around your destination, measured from where you're <em>going</em> — so you know where the car goes before you're circling the block.</p>
+        </div>
+      </div>
+      <div class="wp">
+        <div class="wpmark"><span class="mi">Done</span><span class="dot"></span></div>
+        <div>
+          <h3>Hand off whenever you want turns</h3>
+          <p>Headed doesn't try to replace Apple Maps. One tap sends the route across for turn-by-turn, stops included. Seeing the whole trip is Headed's job; the turns are Apple's.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="bar">
+    <p class="kicker">On the screen</p>
+    <h2>Built to be read at a glance</h2>
+    <p class="sub">Real screens from the app — not renderings of one.</p>
+
+    <div class="gallery">
+      <figure class="shot">
+        <div class="device" style="--w:100%">
+          <span class="btns"><i class="action"></i><i class="up"></i><i class="down"></i><i class="power"></i></span>
+          <span class="screen">
+            <img src="{{ "assets/img/05-pinned-pins-overview.webp" | relURL }}" width="1320" height="2868"
+                 alt="Route overview mid-drive: 44 percent complete, 4.9 miles driven, 6.2 miles left, with pinned parking and food near the destination." loading="lazy" decoding="async">
+          </span>
+        </div>
+        <figcaption><b>Live progress</b>How far you've come and how much is left, without a single turn instruction.</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="device" style="--w:100%">
+          <span class="btns"><i class="action"></i><i class="up"></i><i class="down"></i><i class="power"></i></span>
+          <span class="screen">
+            <img src="{{ "assets/img/04-arrival-poi-pinned.webp" | relURL }}" width="1320" height="2868"
+                 alt="The Arrival sheet listing parking near Oakland City Hall, the nearest 250 feet from the destination." loading="lazy" decoding="async">
+          </span>
+        </div>
+        <figcaption><b>Arrival</b>Parking measured from your destination — 250 feet away, not two miles behind you.</figcaption>
+      </figure>
+      <figure class="shot">
+        <div class="device" style="--w:100%">
+          <span class="btns"><i class="action"></i><i class="up"></i><i class="down"></i><i class="power"></i></span>
+          <span class="screen">
+            <img src="{{ "assets/img/01-hero-empty-state.webp" | relURL }}" width="1320" height="2868"
+                 alt="Headed's opening screen: the Where are you headed licence plate above a destination search field." loading="lazy" decoding="async">
+          </span>
+        </div>
+        <figcaption><b>Start anywhere</b>Search in Headed, or share a destination straight from Apple Maps.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec band">
+  <div class="bar">
+    <div>
+      <p class="kicker">Privacy</p>
+      <h2>Everything stays on your phone</h2>
+      <p class="sub">Headed has no server. That isn't a policy position — there is genuinely nowhere for your trips to go.</p>
+      <ul class="facts">
+        <li>No account, no login, nothing to sign up for.</li>
+        <li>No analytics, no ad tracking, no third-party SDKs in the app.</li>
+        <li>Saved places, recent destinations, and preferences live on your device only.</li>
+        <li>Delete the app and it's all gone — there was never a copy anywhere else.</li>
+      </ul>
+    </div>
+    <div>
+      <p class="lede" style="margin-bottom:20px">Location goes to Apple for routing and weather, and a map area goes to RainViewer and Open Charge Map when you use those features. The policy says exactly what each one sees.</p>
+      <a class="btn btn-ghost" href="{{ "/privacy/" | relURL }}">Read the privacy policy</a>
+    </div>
+  </div>
+</section>
+{{ end }}
