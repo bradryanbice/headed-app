@@ -110,7 +110,7 @@ be reflected here before they take effect.
 
 ## Contact
 
-Questions about this policy or how Headed handles information can be sent to
-[bradbice@icloud.com](mailto:bradbice@icloud.com).
+Questions about this policy or how Headed handles information can be sent through the
+[contact form](/support/#contact).
 
 

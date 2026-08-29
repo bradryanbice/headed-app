@@ -401,3 +401,29 @@ a{color:var(--route);}
   .nav{gap:16px;}
   .nav a{font-size:14px;}
 }
+
+/* ---------- contact form ---------- */
+.formwrap{margin-top:34px;max-width:52ch;}
+.field{display:grid;gap:7px;margin-bottom:18px;}
+.field label{font-size:14.5px;font-weight:600;color:var(--ink);}
+.field input,.field textarea{
+  font-family:inherit;font-size:16px;color:var(--ink);
+  background:var(--card);border:1px solid var(--ink-3);border-radius:8px;
+  padding:11px 13px;width:100%;
+}
+/* The border is --ink-3, NOT the --rule used for decorative hairlines elsewhere.
+   An input's edge is the visual boundary of a UI component, so WCAG 2.1 AA
+   1.4.11 asks 3:1 against its own fill. --rule measures 1.36:1 on light and
+   1.21:1 on dark — invisible; --ink-3 measures 4.17:1 and 4.38:1. Do not
+   "harmonise" this back to --rule. */
+.field textarea{min-height:150px;resize:vertical;}
+.field input:focus,.field textarea:focus{border-color:var(--route);outline:none;
+  box-shadow:0 0 0 3px var(--route-soft);}
+/* --ink-2, not the quieter --ink-3: at 14px this is normal-size text and needs
+   4.5:1, which --ink-3 misses on light (3.99:1). --ink-2 gives 8.12:1. It was
+   already resolving this way — `.prose-body p` outranks a lone class — but
+   stating it means a future tidy-up can't silently turn it into a violation. */
+.formnote{font-size:14px;color:var(--ink-2);margin:14px 0 0;}
+/* Netlify Forms honeypot. Must be in the DOM and reachable by the parser but
+   never shown or focusable — a bot fills it, a person cannot. */
+.hp{display:none;}
