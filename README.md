@@ -15,9 +15,10 @@ than SCSS.
 DNS is **Netlify DNS** (nameservers delegated from Namecheap), so the apex and `www` are both
 Netlify records. `www` is a domain alias that 301s to the apex via `netlify.toml`.
 
-The old GitHub Pages deploy (`.github/workflows/hugo.yml`, plus `static/CNAME`) is **still in place
-on purpose** — see the cutover checklist below. It comes out once headedapp.com is confirmed
-serving from Netlify, not before.
+GitHub Pages is **retired**. The workflow that built and published the Pages artifact, and the
+`static/CNAME` that held the custom domain for it, were deleted on 2026-08-29 once Netlify was
+confirmed serving. The repo has no `.github/` directory at all now — that workflow was its only
+occupant. Netlify is the sole deploy path.
 
 ```
 hugo server        # local preview
@@ -41,8 +42,7 @@ stylesheet is therefore a new URL and can never be served stale from cache, whic
 correctness bug, pinned in visitors' caches for a year. Images stay in `static/` because they don't
 change.
 
-`static/CNAME` holds the custom domain **for GitHub Pages only** — Netlify takes the domain from its
-own settings and ignores this file. `static/assets/img/` holds the app screenshots at native
+`static/assets/img/` holds the app screenshots at native
 1320×2868, converted to WebP — they are deliberately *not* downscaled, because the phone renders are
 large and crispness was the point.
 
@@ -73,8 +73,8 @@ Two things are easy to break:
   minifier truncates the rest of the page. This bit once already. The form's own HTML comment is
   written as one unbroken run for that reason.
 
-The form **cannot work on GitHub Pages** — Pages is static-only with no form handler, so a submission
-405s. It only works once Netlify is serving.
+The form only works on Netlify. Any static-only host — GitHub Pages, which this site used to run
+on — has no form handler and answers a submission with a 405.
 
 Submissions land in **Netlify → Forms**. Emailing them onward is a dashboard setting
 (*Forms → Form notifications → Email notification*), not something this repo configures. The free
@@ -101,29 +101,39 @@ ground, and the violet route line running down the features section as a spine w
 hanging off it as a waypoint. Palette derives from `HeadedDesignSystem` — accent `#5B21B6` light,
 `#A78BFA` dark. Light and dark themes both supported.
 
-## Netlify cutover checklist
+## The Netlify cutover (done 2026-08-29)
 
-In this order. Steps 1–3 are safe and reversible; DNS is the point of no easy return.
+Recorded because it went wrong in an instructive way, and because the same sequence applies to any
+future host move.
 
-1. **Create the Netlify site** from this repo. It reads `netlify.toml`, so there is nothing to
-   configure in the UI.
-2. **Verify on the `*.netlify.app` URL before touching DNS** — all five pages, and **submit the
-   contact form for real**. A submission must appear under *Forms*. This is the only way to confirm
-   Netlify detected the form; the markup looking right proves nothing.
-3. **Set the email notification** (*Forms → Form notifications*), then submit once more and confirm
-   the mail arrives.
-4. **Add `headedapp.com` and `www.headedapp.com`** as domains on the Netlify site.
-5. **Delegate DNS**: point the Namecheap nameservers at Netlify DNS. Wait for the Netlify
-   certificate to issue for both hosts.
-6. **Verify the live domain**: apex and `www` both 200 over HTTPS, `www` 301s to the apex, and the
-   form still works on the real domain.
-7. **Only then, retire GitHub Pages**: remove the custom domain in the `headed-app` repo's
-   *Settings → Pages*, then delete `.github/workflows/hugo.yml` and `static/CNAME`.
+The site was already Hugo; only the host changed. Netlify reads `netlify.toml`, DNS was delegated
+to Netlify DNS, and GitHub Pages was retired afterwards.
 
-> **The window in between.** Merging the Netlify branch to `main` before step 2 publishes the form
-> to the *GitHub Pages* site, where it renders but 405s on submit. The site has no traffic yet, so
-> this is cosmetic — but don't leave it sitting there.
+**Three failures happened, in this order.** All three would have been invisible if DNS had still
+pointed at Pages — the old host would have kept serving while they were sorted out.
 
-> **`bradryanbice.github.io/headed-app/*` stops redirecting** once the Pages custom domain is
-> removed in step 7. Those URLs currently 301 to headedapp.com. Nothing external references them
-> (the domain cutover happened before any release), but it is a real change, not a no-op.
+1. **`exit code 127: hugo`.** `netlify.toml` had been written but not committed, so `main` — the
+   branch Netlify built — did not contain it. Netlify fell back to the dashboard's build command
+   and had no `HUGO_VERSION`, so there was no Hugo binary. **`commandOrigin: ui` in the log is the
+   diagnostic**: it means the config file was not found in the built commit, not that its contents
+   are wrong.
+2. **A raw-HTML block silently truncated `/support/`.** See the Contact form section above. The
+   build reported success.
+3. **The build-skip rule canceled the first production deploy, and the site went down.** `main`
+   never moved while the PR was open, so the merge commit's tree was byte-identical to the branch
+   tip a deploy preview had already built. Netlify's cached ref pointed at that preview, the rule
+   diffed preview against merge, found no change, and skipped — on a site with no published
+   production deploy to fall back to. Every route served Netlify's plain-text "no published deploy"
+   404. The rule is now disabled; `netlify.toml` carries the full account and the conditions for
+   reinstating it.
+
+**The ordering rule worth keeping:** delegate DNS *last*, and only after a real form submission has
+landed in the dashboard from the `*.netlify.app` URL. DNS is the step that converts a build bug
+into an outage. A build-skip optimisation in particular must never be live during a first
+production deploy or a host cutover — it can save seconds and cost the whole site.
+
+**Still open:** the GitHub Pages *site* is deleted from the repo, but if the custom domain is still
+set under *Settings → Pages*, `bradryanbice.github.io/headed-app/` keeps 301ing to headedapp.com.
+That redirect is currently harmless and arguably useful. Clearing it without disabling Pages
+entirely would make that URL serve a stale duplicate of the site instead — the worse of the two
+outcomes.
