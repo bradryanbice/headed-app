@@ -6,6 +6,40 @@
   publish = "public"
   command = "hugo --gc --minify"
 
+  # ---------------------------------------------------------------------------
+  # THE BUILD-SKIP RULE IS DISABLED. Do not re-enable it without reading this.
+  #
+  # 2026-08-29: headedapp.com served Netlify's "no published deploy" 404 on every
+  # route. Deploy history: production@a7dd75e FAILED (no netlify.toml on main
+  # yet), two deploy previews of the branch SUCCEEDED, then production@f4235c6 —
+  # the merge of that branch — was CANCELED. "Canceled" is how Netlify reports a
+  # build this rule skipped.
+  #
+  # The mechanism, confirmed rather than guessed: main had not moved, so the
+  # merge commit's tree is BYTE-IDENTICAL to the branch tip the deploy preview
+  # had already built (both a368004). $CACHED_COMMIT_REF for the production
+  # build therefore pointed at that PREVIEW, the rule diffed preview vs merge,
+  # found no change, and skipped.
+  #
+  # The rule was correct that no content had changed. It was catastrophically
+  # wrong anyway, because it reasons about CONTENT while the thing that mattered
+  # was CONTEXT: a deploy preview is not a production publish, and production had
+  # never published anything to fall back to. The original comment's premise —
+  # "the failure mode is a wasted deploy, not a stale site" — assumes a published
+  # site exists. On a first production deploy there is nothing stale to serve,
+  # and the failure mode is an outage.
+  #
+  # Note this is a SECOND, independent defect from the empty-$CACHED_COMMIT_REF
+  # one the guard below fixes. The guard is correct and did its job; it simply
+  # does not address this case, because here the ref was set and the diff was
+  # honestly empty.
+  #
+  # Before reinstating: the site must already be published and serving, so that a
+  # wrongly-skipped build degrades to a stale site rather than no site. Then
+  # re-enable on a branch, and confirm a production build still runs after a
+  # merge whose tree was already previewed — that is the exact case that broke.
+  # ---------------------------------------------------------------------------
+
   # Skip the deploy when nothing Hugo reads has changed. A build here is almost
   # entirely fixed overhead — the site builds in well under a second and the
   # deploy around it is minutes of clone, toolchain and upload — so the only
@@ -33,7 +67,7 @@
   #
   # With the guard: empty ref → 1 (build), unknown ref → 128 (build), content
   # change → 1 (build), README-only change → 0 (skip), identical refs → 0 (skip).
-  ignore = '''[ -n "$CACHED_COMMIT_REF" ] && git diff --quiet "$CACHED_COMMIT_REF" "$COMMIT_REF" -- . ':(exclude).github' ':(exclude)README.md' ':(exclude).gitignore' '''
+  # ignore = '''[ -n "$CACHED_COMMIT_REF" ] && git diff --quiet "$CACHED_COMMIT_REF" "$COMMIT_REF" -- . ':(exclude).github' ':(exclude)README.md' ':(exclude).gitignore' '''
 
 [build.environment]
   # Pin the toolchain so Netlify builds match local builds.
