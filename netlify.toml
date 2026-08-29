@@ -18,11 +18,22 @@
   # so a change to them needs a deploy.
   #
   # `git diff --quiet` exits 0 on no difference and Netlify reads exit 0 as
-  # "skip". Every way this can go wrong — an empty $CACHED_COMMIT_REF on a first
-  # build or after a cache clear, a ref missing from the shallow clone, a bad
-  # pathspec — exits non-zero and therefore BUILDS. The failure mode is a wasted
-  # deploy, not a stale site.
-  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ':(exclude).github' ':(exclude)README.md' ':(exclude).gitignore'"
+  # "skip", so every failure path must exit NON-zero to fail safe by building.
+  #
+  # The `[ -n ... ] &&` guard is load-bearing, and the bare form this was copied
+  # from (calaround.app, and Netlify's own docs) gets it WRONG. With an empty
+  # $CACHED_COMMIT_REF — a first build, or after a cache clear — an UNQUOTED
+  # variable vanishes from the command line, leaving
+  #     git diff --quiet $COMMIT_REF -- .
+  # which compares that commit against the WORKING TREE. On a clean checkout that
+  # is no difference, exit 0, and the deploy is SKIPPED: no site published, and a
+  # "build skipped" message that reads like success. Verified by running all four
+  # cases. The guard short-circuits to exit 1 when the ref is empty, and the
+  # quotes stop the same collapse from happening again.
+  #
+  # With the guard: empty ref → 1 (build), unknown ref → 128 (build), content
+  # change → 1 (build), README-only change → 0 (skip), identical refs → 0 (skip).
+  ignore = '''[ -n "$CACHED_COMMIT_REF" ] && git diff --quiet "$CACHED_COMMIT_REF" "$COMMIT_REF" -- . ':(exclude).github' ':(exclude)README.md' ':(exclude).gitignore' '''
 
 [build.environment]
   # Pin the toolchain so Netlify builds match local builds.
