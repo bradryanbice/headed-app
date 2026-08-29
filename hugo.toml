@@ -5,7 +5,10 @@ enableRobotsTXT = true
 
 [params]
   description = "See your whole trip before you drive it. Headed is a journey-overview companion for Apple Maps."
-  email = "bradbice@icloud.com"
+  # No contact email here on purpose. There was an `email` param, and baseof.html
+  # rendered it into EVERY page footer — one param, an address on every page, all
+  # of it scrapeable. The site's one contact route is now the Netlify form at
+  # /support/#contact, linked directly from the footer and the landing page.
 
 [markup.goldmark.renderer]
   unsafe = true

@@ -4,9 +4,7 @@ title: "Support"
 description: "How to get help with Headed, and answers to the questions that come up most — including why there's no turn-by-turn."
 ---
 
-**Email:** [bradbice@icloud.com](mailto:bradbice@icloud.com?subject=Headed%20support)
-
-Headed has no accounts, no subscriptions, and no support portal. Email reaches a person directly.
+Headed has no accounts, no subscriptions, and no support portal. The [contact form](#contact) at the bottom of this page reaches a person directly.
 
 ## What to include when something goes wrong
 
@@ -62,7 +60,42 @@ Routing, search, and the map work anywhere Apple Maps does. The weather, hazard,
 
 ## Reporting a privacy concern
 
-Email the address above. The [Privacy Policy](/privacy/) sets out exactly what stays on your device and what each outside service receives.
+Use the [contact form](#contact) below. The [Privacy Policy](/privacy/) sets out exactly what stays on your device and what each outside service receives.
+
+## Contact {#contact}
+
+Questions, bugs, or something that behaved oddly on a drive — this goes straight to email.
+
+<div class="formwrap">
+<!-- Netlify Forms. The three attributes below are the whole wiring: Netlify's
+     post-processing parses the DEPLOYED html, finds the form by `name`, and
+     starts accepting posts at this same path. `data-netlify` is the documented
+     spelling of the bare `netlify` attribute and is valid html5. The hidden
+     form-name input is what attributes a submission to this form — without it
+     the post is accepted and filed nowhere. bot-field is the honeypot: real
+     people never see it, bots fill it, and Netlify silently drops those.
+     NOTE: no blank line anywhere inside this block. A blank line ends Goldmark's
+     raw-html block, after which the indented continuation lines parse as an
+     indented CODE block and the rest of the page is mangled. -->
+<form name="contact" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field">
+  <input type="hidden" name="form-name" value="contact">
+  <p class="hp"><label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+  <div class="field">
+    <label for="cf-email">Your email</label>
+    <input id="cf-email" type="email" name="email" required autocomplete="email">
+  </div>
+  <div class="field">
+    <label for="cf-subject">Subject</label>
+    <input id="cf-subject" type="text" name="subject" required>
+  </div>
+  <div class="field">
+    <label for="cf-message">Message</label>
+    <textarea id="cf-message" name="message" required></textarea>
+  </div>
+  <button class="btn btn-primary" type="submit">Send</button>
+  <p class="formnote">Your address is used to reply to you and nothing else. It isn't added to a list, because there is no list.</p>
+</form>
+</div>
 
 ## Legal
 

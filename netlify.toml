@@ -1,0 +1,96 @@
+# Netlify build config. Mirrors calaround.app, which is the closest sibling: same
+# Hugo version, same plain-CSS-through-Hugo's-own-pipeline setup (no dart-sass
+# step — do not copy bradbice.com's dart-sass download in here unless that
+# changes).
+[build]
+  publish = "public"
+  command = "hugo --gc --minify"
+
+  # Skip the deploy when nothing Hugo reads has changed. A build here is almost
+  # entirely fixed overhead — the site builds in well under a second and the
+  # deploy around it is minutes of clone, toolchain and upload — so the only
+  # lever on build minutes is the NUMBER of deploys.
+  #
+  # None of the excluded paths is a Hugo input. hugo.toml declares no custom
+  # module mounts, so Hugo reads content/, data/, layouts/, assets/, static/,
+  # themes/, i18n/, archetypes/ and hugo.toml. netlify.toml itself is
+  # deliberately NOT excluded: headers and redirects are applied at deploy time,
+  # so a change to them needs a deploy.
+  #
+  # `git diff --quiet` exits 0 on no difference and Netlify reads exit 0 as
+  # "skip", so every failure path must exit NON-zero to fail safe by building.
+  #
+  # The `[ -n ... ] &&` guard is load-bearing, and the bare form this was copied
+  # from (calaround.app, and Netlify's own docs) gets it WRONG. With an empty
+  # $CACHED_COMMIT_REF — a first build, or after a cache clear — an UNQUOTED
+  # variable vanishes from the command line, leaving
+  #     git diff --quiet $COMMIT_REF -- .
+  # which compares that commit against the WORKING TREE. On a clean checkout that
+  # is no difference, exit 0, and the deploy is SKIPPED: no site published, and a
+  # "build skipped" message that reads like success. Verified by running all four
+  # cases. The guard short-circuits to exit 1 when the ref is empty, and the
+  # quotes stop the same collapse from happening again.
+  #
+  # With the guard: empty ref → 1 (build), unknown ref → 128 (build), content
+  # change → 1 (build), README-only change → 0 (skip), identical refs → 0 (skip).
+  ignore = '''[ -n "$CACHED_COMMIT_REF" ] && git diff --quiet "$CACHED_COMMIT_REF" "$COMMIT_REF" -- . ':(exclude).github' ':(exclude)README.md' ':(exclude).gitignore' '''
+
+[build.environment]
+  # Pin the toolchain so Netlify builds match local builds.
+  HUGO_VERSION = "0.165.0"
+  TZ = "America/New_York"
+
+# Deploy previews (pull requests) and branch deploys build against their own
+# generated URL so links and assets resolve on the preview host.
+[context.deploy-preview]
+  command = "hugo --gc --minify --baseURL $DEPLOY_PRIME_URL"
+
+[context.branch-deploy]
+  command = "hugo --gc --minify --baseURL $DEPLOY_PRIME_URL"
+
+# Keep one canonical hostname. Netlify issues certificates for both, but serving
+# the same content on two hosts splits SEO. This site is moving to Netlify DNS,
+# where `www` is a domain alias on the same site rather than a separate CNAME —
+# the alias makes both hosts SERVE, and this redirect is what makes only one of
+# them canonical. Both are needed.
+[[redirects]]
+  from = "https://www.headedapp.com/*"
+  to = "https://headedapp.com/:splat"
+  status = 301
+  force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Deliberately NO Cache-Control rule for the HTML. Header rules match the REQUEST
+# path and this site publishes pretty URLs — the request is `/support/`, never
+# `/support/index.html` — so an `/*.html` rule would match nothing. Netlify's own
+# default for HTML is already `public, max-age=0, must-revalidate`, which is what
+# such a rule would be asking for. Confirm against the response headers on a
+# deploy preview rather than trusting this comment.
+
+# Everything published to /css/ carries a content hash in its filename
+# (baseof.html fingerprints it with sha256 and pins it with an `integrity`
+# attribute), so a change produces a NEW url and a cached copy of the old one can
+# never be stale. That is the whole precondition for `immutable` — an
+# UNfingerprinted file published into /css/ would be a correctness bug, pinned in
+# visitors' caches for a year with no way to bust it. Anything in static/ is
+# copied verbatim and gets none of that hashing, so it must not be published to
+# this path.
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# The screenshots are content-stable (see README: native 1320×2868, deliberately
+# not downscaled, replaced rather than edited) but carry no content hash, so they
+# get a long max-age WITHOUT `immutable` — a replaced image revalidates rather
+# than being pinned.
+[[headers]]
+  for = "/assets/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, must-revalidate"

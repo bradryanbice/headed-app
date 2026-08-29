@@ -129,7 +129,6 @@ accept the updated Terms.
 
 ## 12. Contact
 
-Questions about these Terms can be sent to
-[bradbice@icloud.com](mailto:bradbice@icloud.com).
+Questions about these Terms can be sent through the [contact form](/support/#contact).
 
 
